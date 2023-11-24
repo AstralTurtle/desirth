@@ -34,7 +34,7 @@ class ReusableDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const LandingPage()));
               }),
-          ListTile(title: const Text("Reigons")),
+          ListTile(title: const Text("Regions")),
           ListTile(title: const Text("Stories")),
           ListTile(
             title: const Text("Map"),
