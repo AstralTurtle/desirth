@@ -55,7 +55,7 @@ class _LandingPageState extends State<LandingPage> {
 
           title: const Text("Welcome to Desirth"),
         ),
-        // Reuable Drawer is defined in ./lib/Reusables.dart
+        // Reusable Drawer is defined in ./lib/Reusables.dart
         drawer: const Reusable.ReusableDrawer(),
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
