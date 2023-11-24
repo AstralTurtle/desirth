@@ -12,7 +12,7 @@ class DesirthApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Desirth Universe',
       theme: ThemeData(
         // This is the theme of your application.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -48,32 +48,33 @@ class _LandingPageState extends State<LandingPage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-        appBar: AppBar(
-          // Sets background color of the AppBar using the colorScheme described in the app widget.
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    return SafeArea(
+        child: Scaffold(
+            appBar: AppBar(
+              // Sets background color of the AppBar using the colorScheme described in the app widget.
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
 
-          title: const Text("Welcome to Desirth"),
-        ),
-        // Reusable Drawer is defined in ./lib/Reusables.dart
-        drawer: const Reusable.ReusableDrawer(),
-        body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: ListView(
-            children: [
-              const ListTile(
-                titleAlignment: ListTileTitleAlignment.center,
-                title: const Center(
-                  child: const Text("Welcome to Desirth",
-                      style: const TextStyle(fontSize: 24)),
-                ),
-                subtitle:
-                    const Center(child: const Text("by Supernal Studios")),
+              title: const Text("Welcome to Desirth"),
+            ),
+            // Reusable Drawer is defined in ./lib/Reusables.dart
+            drawer: const Reusable.ReusableDrawer(),
+            body: Center(
+              // Center is a layout widget. It takes a single child and positions it
+              // in the middle of the parent.
+              child: ListView(
+                children: [
+                  const ListTile(
+                    titleAlignment: ListTileTitleAlignment.center,
+                    title: const Center(
+                      child: const Text("Welcome to Desirth",
+                          style: const TextStyle(fontSize: 24)),
+                    ),
+                    subtitle:
+                        const Center(child: const Text("by Supernal Studios")),
+                  ),
+                ],
               ),
-            ],
-          ),
-          // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+              // This trailing comma makes auto-formatting nicer for build methods.
+            )));
   }
 }
