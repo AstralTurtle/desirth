@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:desirth/Reusable.dart' as Reusable;
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+const FirebaseOptions options = FirebaseOptions(
+    apiKey: "AIzaSyCRXOHoWZ1QY-oxBvkBT5L58NU0GwKcndY",
+    authDomain: "desirth-app.firebaseapp.com",
+    projectId: "desirth-app",
+    storageBucket: "desirth-app.appspot.com",
+    messagingSenderId: "340486672266",
+    appId: "1:340486672266:web:737d0edc359eaca778c273");
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: options);
   runApp(const DesirthApp());
 }
 
