@@ -17,6 +17,9 @@ class _ManagePageState extends State<ManagePage> {
   static Map<String, dynamic> _userData = {};
   static Map<String, dynamic> _storyData = {};
 
+  static Map<String, dynamic> filteredUserData = {};
+  static Map<String, dynamic> filteredStoryData = {};
+
   TextEditingController nameSearch = TextEditingController();
   TextEditingController storySearch = TextEditingController();
 
@@ -89,10 +92,20 @@ class _ManagePageState extends State<ManagePage> {
                   border: OutlineInputBorder(),
                   labelText: 'Search for user',
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    userTiles = createUserTiles(_userData);
+                  });
+                },
               ),
             ),
             //
-            ...userTiles,
+            ...userTiles.where((element) {
+              return element
+                  .toString()
+                  .toLowerCase()
+                  .contains(nameSearch.text.toLowerCase());
+            }).toList(),
           ]),
           Column(children: [
             Text("Story Management"),
@@ -104,15 +117,27 @@ class _ManagePageState extends State<ManagePage> {
                   border: OutlineInputBorder(),
                   labelText: 'Search for story',
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    storyTiles = createStoryTiles(_storyData);
+                  });
+                },
               ),
             ),
-            ...storyTiles,
+            ...storyTiles.where((element) {
+              return element
+                  .toString()
+                  .toLowerCase()
+                  .contains(nameSearch.text.toLowerCase());
+            }).toList(),
           ]),
         ],
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.save),
           onPressed: () {
+            saveUserData();
+            saveStoryData();
             print(_userData);
           }),
     ));
@@ -144,6 +169,15 @@ class UserTile extends StatefulWidget {
       required this.isWriter,
       required this.name,
       required this.docId});
+
+  getName() {
+    return name;
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return name;
+  }
 
   @override
   State<UserTile> createState() => _UserTileState();
@@ -235,6 +269,11 @@ class StoryTile extends StatefulWidget {
       required this.docId,
       required this.title,
       required this.approved});
+
+  @override
+  toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return title;
+  }
 
   @override
   State<StoryTile> createState() => _StoryTileState();
