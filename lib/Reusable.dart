@@ -1,6 +1,8 @@
 // page for widgets that are reused in multiple places in the app.
 
 // flutter
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 // navigatable pages
@@ -92,6 +94,8 @@ class _ReusableDrawerState extends State<ReusableDrawer> {
   }
 
   getUserFireStore(User user) async {
+    // TODO: check if the user is in cookies / local storage
+
     // get the user from the firestore
     // if the user doesn't exist, create it
     // if the user does exist, return it
@@ -102,6 +106,8 @@ class _ReusableDrawerState extends State<ReusableDrawer> {
     DocumentSnapshot userDoc =
         await firestore.collection("users").doc(user.uid).get();
     if (userDoc.exists) {
+      // TODO: add the user to the cookies / local storage
+
       return userDoc;
     } else {
       firestore.collection("users").doc(user.uid).set({

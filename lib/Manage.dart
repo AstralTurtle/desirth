@@ -13,21 +13,14 @@ class ManagePage extends StatefulWidget {
 }
 
 class _ManagePageState extends State<ManagePage> {
-  User? _user;
   static Map<String, dynamic> _userData = {};
   static Map<String, dynamic> _storyData = {};
-
-  static Map<String, dynamic> filteredUserData = {};
-  static Map<String, dynamic> filteredStoryData = {};
 
   TextEditingController nameSearch = TextEditingController();
   TextEditingController storySearch = TextEditingController();
 
   List<Widget> userTiles = [];
   List<Widget> storyTiles = [];
-
-  Future<Map<String, dynamic>>? userDataFuture;
-  Future<Map<String, dynamic>>? storyDataFuture;
 
   static void editUserData(String docId, Map<String, dynamic> data) {
     _userData[docId] = data;
@@ -51,7 +44,7 @@ class _ManagePageState extends State<ManagePage> {
 
   @override
   void initState() {
-    userDataFuture = getUserData().then((value) {
+    getUserData().then((value) {
       setState(() {
         _userData = value;
         userTiles = createUserTiles(_userData);
@@ -59,7 +52,7 @@ class _ManagePageState extends State<ManagePage> {
 
       return value;
     });
-    storyDataFuture = getStoryData().then((value) {
+    getStoryData().then((value) {
       setState(() {
         _storyData = value;
         storyTiles = createStoryTiles(_storyData);
@@ -99,7 +92,7 @@ class _ManagePageState extends State<ManagePage> {
                 },
               ),
             ),
-            //
+            // TODO: change this to a future builder? or a list of futurebuilders?
             ...userTiles.where((element) {
               return element
                   .toString()
@@ -124,6 +117,7 @@ class _ManagePageState extends State<ManagePage> {
                 },
               ),
             ),
+            // TODO: change this to a future builder? or a list of futurebuilders?
             ...storyTiles.where((element) {
               return element
                   .toString()
@@ -138,7 +132,6 @@ class _ManagePageState extends State<ManagePage> {
           onPressed: () {
             saveUserData();
             saveStoryData();
-            print(_userData);
           }),
     ));
   }
@@ -228,14 +221,9 @@ class _UserTileState extends State<UserTile> {
 
 createUserTiles(Map<String, dynamic> userData) {
   List<Widget> userTiles = [];
-  int num = 0;
   userData.keys.forEach((element) {
-    print(element);
-    print(element.runtimeType);
-    print(num++);
     userTiles.add(UserTile(
-      // one of docId or name throws a type error
-      docId: element.toString(),
+      docId: element,
       name: userData[element]["name"],
       isAdmin: userData[element]["isAdmin"],
       isWriter: userData[element]["isWriter"],
